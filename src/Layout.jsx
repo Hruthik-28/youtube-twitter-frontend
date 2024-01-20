@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Header/Navbar";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/Header/Sidebar";
 
 function Layout() {
     return (
@@ -9,7 +9,7 @@ function Layout() {
             <Navbar />
             <div className="sm:flex flex-none">
                 <div className="">
-                <Sidebar />
+                    <Sidebar />
                 </div>
                 <div className="sm:flex-1">
                     <Outlet />
