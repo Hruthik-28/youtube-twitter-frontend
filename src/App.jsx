@@ -4,9 +4,15 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import { Toaster } from "react-hot-toast";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { getCurrentUser } from "./store/AuthSlice";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCurrentUser());
+    }, [dispatch])
 
     return (
         <>
