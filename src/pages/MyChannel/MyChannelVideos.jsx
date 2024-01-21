@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoList } from "../../components";
+import { VideoList } from "../../components/index";
 
 function MyChannelVideos() {
     return (

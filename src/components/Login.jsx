@@ -2,7 +2,7 @@ import React from "react";
 import { Logo, Button, Input } from "./index";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUser, userLogin } from "../store/AuthSlice";
+import { getCurrentUser, userLogin } from "../store/Slices/authSlice.js";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
