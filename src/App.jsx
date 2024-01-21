@@ -4,8 +4,9 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import { Toaster } from "react-hot-toast";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/AuthSlice";
+import MyChannel from "./pages/MyChannel";
 
 function App() {
     const dispatch = useDispatch();
@@ -19,6 +20,12 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="" element={<HomePage />}/>
+                    <Route path="/my-content" element={<MyChannel />}>
+                        <Route path="videos" element=''/>
+                        <Route path="playlists" element=''/>
+                        <Route path="tweets" element=''/>
+                        <Route path="subscribed" element=''/>
+                    </Route>
                 </Route>
                 <Route path="/login" element={<Login />}/>
             </Routes>
