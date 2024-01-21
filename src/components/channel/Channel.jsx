@@ -9,6 +9,7 @@ function Channel({
     fullName,
     subscribersCount,
     subscribedCount,
+    children,
 }) {
     return (
         <>
@@ -38,10 +39,10 @@ function Channel({
                             </h3>
                             <div className="flex gap-1">
                                 <p className="text-xs text-slate-400">
-                                    {subscribersCount} subscribers
+                                    {subscribersCount} Subscribers
                                 </p>
                                 <p className="text-xs text-slate-400">
-                                    {subscribedCount} subscribed
+                                    {subscribedCount} Subscribed
                                 </p>
                             </div>
                         </div>
@@ -56,7 +57,7 @@ function Channel({
                 <section className="w-full flex justify-evenly items-center border-b-2 border-slate-600 text-sm sm:text-base sm:mt-4 md:mt-0 mt-2">
                     <NavLink
                         to={"/my-content/videos"}
-                        className={({isActive}) =>
+                        className={({ isActive }) =>
                             isActive
                                 ? "bg-white text-purple-600 border-b-2 border-purple-600"
                                 : ""
@@ -66,7 +67,7 @@ function Channel({
                     </NavLink>
                     <NavLink
                         to={"/my-content/playlists"}
-                        className={({isActive}) =>
+                        className={({ isActive }) =>
                             isActive
                                 ? "bg-white text-purple-600 border-b-2 border-purple-600"
                                 : ""
@@ -76,7 +77,7 @@ function Channel({
                     </NavLink>
                     <NavLink
                         to={"/my-content/tweets"}
-                        className={({isActive}) =>
+                        className={({ isActive }) =>
                             isActive
                                 ? "bg-white text-purple-600 border-b-2 border-purple-600"
                                 : ""
@@ -86,7 +87,7 @@ function Channel({
                     </NavLink>
                     <NavLink
                         to={"/my-content/subscribed"}
-                        className={({isActive}) =>
+                        className={({ isActive }) =>
                             isActive
                                 ? "bg-white text-purple-600 border-b-2 border-purple-600"
                                 : ""
@@ -95,6 +96,8 @@ function Channel({
                         <p className="p-2">Subscribed</p>
                     </NavLink>
                 </section>
+
+                <section>{children}</section>
             </div>
         </>
     );
