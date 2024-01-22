@@ -1,14 +1,15 @@
 import React from "react";
-import { timeAgo } from "../helpers/timeAgo";
+import { formatDuration, timeAgo } from "../helpers/timeAgo";
+import { Link } from "react-router-dom";
 function VideoList({
     thumbnail,
     duration,
     title,
-    views,
+    views = 0,
     avatar,
     channelName,
-    description,
     createdAt,
+    channelId,
 }) {
     return (
         <>
@@ -18,15 +19,19 @@ function VideoList({
                         src={thumbnail}
                         className="object-cover"
                     />
-                    <span className="absolute bottom-2 right-2 rounded-lg text-sm bg-black py-1 px-2">{Math.floor(duration)}</span>
+                    <span className="absolute bottom-2 right-2 rounded-lg text-sm bg-black py-1 px-2">
+                        {formatDuration(duration)}
+                    </span>
                 </div>
                 <div className="flex items-center py-1 px-2 gap-2">
                     {avatar && (
-                        <img
-                            src={avatar}
-                            className="w-10 h-10 rounded-full"
-                            alt=""
-                        />
+                        <Link to={`/${channelId}`}>
+                            <img
+                                src={avatar}
+                                className="w-10 h-10 rounded-full object-cover"
+                                alt=""
+                            />
+                        </Link>
                     )}
                     <div>
                         <h2 className="font-medium">{title}</h2>
