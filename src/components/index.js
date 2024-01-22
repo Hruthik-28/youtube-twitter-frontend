@@ -8,5 +8,6 @@ import Sidebar from "./Header/Sidebar";
 import Logo from "./Logo";
 import ChannelHeader from "./channel/ChannelHeader";
 import VideoList from "./VideoList";
+import SignUp from "./Signup";
 
-export { Button, Container, Input, Login, Navbar, Search, Sidebar, Logo, ChannelHeader, VideoList };
+export { Button, Container, Input, Login, Navbar, Search, Sidebar, Logo, ChannelHeader, VideoList, SignUp };

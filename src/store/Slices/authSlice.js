@@ -9,9 +9,19 @@ const initialState = {
 };
 
 export const createAccount = createAsyncThunk("register", async (data) => {
+    const formData = new FormData();
+    formData.append("avatar", data.avatar[0]);
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("fullName", data.fullName);
+
+
+
     try {
-        const response = await axiosInstance.post("/users/register", data);
+        const response = await axiosInstance.post("/users/register", formData,);
         console.log(response.data);
+        toast.success("Registered successfully!!!");
         return response.data;
     } catch (error) {
         toast.error(error?.response?.data?.error);
@@ -41,40 +51,58 @@ export const userLogout = createAsyncThunk("logout", async () => {
     }
 });
 
-export const refreshAccessToken = createAsyncThunk("refreshAccessToken", async (data) => {
-    try {
-        const response = await axiosInstance.post("/users/refresh-token", data);
-        // console.log(response.data);
-        return response.data;
-    } catch (error) {
-        toast.error(error?.response?.data?.error);
-        throw error;
+export const refreshAccessToken = createAsyncThunk(
+    "refreshAccessToken",
+    async (data) => {
+        try {
+            const response = await axiosInstance.post(
+                "/users/refresh-token",
+                data
+            );
+            // console.log(response.data);
+            return response.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
     }
-});
+);
 
-export const changePassword = createAsyncThunk("changePassword", async (data) => {
-    try {
-        const response = await axiosInstance.post("/users/change-password", data);
-        // console.log(response.data);
-        toast.success(response.data.data);
-        return response.data;
-    } catch (error) {
-        toast.error(error?.response?.data?.error);
-        throw error;
+export const changePassword = createAsyncThunk(
+    "changePassword",
+    async (data) => {
+        try {
+            const response = await axiosInstance.post(
+                "/users/change-password",
+                data
+            );
+            // console.log(response.data);
+            toast.success(response.data.data);
+            return response.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
     }
-});
+);
 
-export const getCurrentUser = createAsyncThunk("getCurrentUser", async() => {
+export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     const response = await axiosInstance.get("/users/current-user");
     // console.log(response.data);
     return response.data;
-})
+});
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        builder.addCase(createAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(createAccount.fulfilled, (state) => {
+            state.loading = false;
+        });
         builder.addCase(userLogin.pending, (state) => {
             state.loading = true;
         });
@@ -103,7 +131,6 @@ const authSlice = createSlice({
             state.status = false;
             state.userData = null;
         });
-
     },
 });
 

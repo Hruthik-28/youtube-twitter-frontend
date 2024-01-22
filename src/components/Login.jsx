@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser, userLogin } from "../store/Slices/authSlice.js";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LoginSkeleton from "../skeleton/loginSkeleton.jsx";
 
 function Login() {
     const {
@@ -14,6 +15,7 @@ function Login() {
     } = useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.auth?.loading);
 
     const submit = async (data) => {
         const isEmail = data.username.includes("@");
@@ -27,6 +29,10 @@ function Login() {
             navigate("/");
         }
     };
+
+    if (loading) {
+        return <LoginSkeleton />
+    }
 
     return (
         <>
