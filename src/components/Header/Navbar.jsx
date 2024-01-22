@@ -63,11 +63,11 @@ function Navbar() {
 
                 {/* login and signup butons for larger screens */}
                 {authStatus ? (
-                    <div className="w-10 space-x-2 sm:block hidden">
+                    <div className="rounded-full sm:block hidden">
                         <img
                             src={profileImg}
                             alt="profileImg"
-                            className="rounded-full"
+                            className="rounded-full w-10 h-10 object-cover"
                         />
                     </div>
                 ) : (

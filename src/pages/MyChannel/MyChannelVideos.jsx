@@ -14,7 +14,7 @@ function MyChannelVideos() {
     }, [dispatch, userId]);
     return (
         <>
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white border">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white">
                 {videos?.map((video) => (
                     <Link
                         to={`/watch/${video._id}`}

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/Slices/authSlice";
 import MyChannel from "./pages/MyChannel/MyChannel";
 import MyChannelVideos from "./pages/MyChannel/MyChannelVideos";
+import History from "./pages/History";
 
 function App() {
     const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
                         <Route path="tweets" element={""}/>
                         <Route path="subscribed" element={""}/>
                     </Route>
+                    <Route path="/history" element={<History />}/>
                 </Route>
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
