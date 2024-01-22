@@ -6,8 +6,6 @@ const initialState = {
     loading: false,
     status: false,
     userData: null,
-    accessToken: null,
-    refreshToken: null,
 };
 
 export const createAccount = createAsyncThunk("register", async (data) => {
@@ -97,6 +95,7 @@ const authSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+            state.loading = false;
             state.status = true;
             state.userData = action.payload.data;
         });
