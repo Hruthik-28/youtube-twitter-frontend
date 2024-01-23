@@ -5,7 +5,8 @@ import { BASE_URL } from "../../constants";
 
 const initialState = {
     loading: false,
-    videos: [],
+    isPublished: null,
+    video: null
 };
 
 export const getAllVideos = createAsyncThunk(
@@ -34,8 +35,78 @@ export const getAllVideos = createAsyncThunk(
     }
 );
 
+export const publishAvideo = createAsyncThunk("publishAvideo", async(data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("videoFile", data.videoFile);
+    formData.append("thumbnail", data.thumbnail[0]);
+
+    try {
+        const response = await axiosInstance.post('/video', formData);
+        console.log(response.data.data);
+        toast.success(response?.data?.message);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const updateAVideo = createAsyncThunk("updateAVideo", async(data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("thumbnail", data.thumbnail[0]);
+
+    try {
+        const response = await axiosInstance.patch(`/video/v/${data.videoId}`, formData);
+        console.log(response.data.data);
+        toast.success(response?.data?.message);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const deleteAVideo = createAsyncThunk("deleteAVideo", async(videoId) => {
+    try {
+        const response = await axiosInstance.delete(`/video/v/${videoId}`);
+        console.log(response.data.data);
+        toast.success(response?.data?.message);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const getVideoById = createAsyncThunk("getVideoById", async(videoId) => {
+    try {
+        const response = await axiosInstance.get(`/video/v/${videoId}`);
+        console.log(response.data.data);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const togglePublishStatus = createAsyncThunk("togglePublishStatus", async(videoId) => {
+    try {
+        const response = await axiosInstance.get(`/video/toggle/publish/${videoId}`);
+        console.log(response.data.data.isPublished);
+        toast.success(response.data.data.message);
+        return response.data.data.isPublished;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
 const videoSlice = createSlice({
-    name: "user",
+    name: "video",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -45,6 +116,34 @@ const videoSlice = createSlice({
         builder.addCase(getAllVideos.fulfilled, (state, action) => {
             state.loading = false;
             state.videos = action.payload;
+        });
+        builder.addCase(publishAvideo.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(publishAvideo.fulfilled, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(updateAVideo.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(updateAVideo.fulfilled, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(deleteAVideo.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteAVideo.fulfilled, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(getVideoById.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getVideoById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.video = action.payload;
+        });
+        builder.addCase(togglePublishStatus.fulfilled, (state, action) => {
+            state.isPublished = action.payload;
         });
     },
 });
