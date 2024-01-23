@@ -33,7 +33,7 @@ export const userLogin = createAsyncThunk("login", async (data) => {
     try {
         const response = await axiosInstance.post("/users/login", data);
         console.log(response.data);
-        return response.data;
+        return response.data.data.user;
     } catch (error) {
         toast.error(error?.response?.data?.error);
         throw error;
@@ -89,7 +89,7 @@ export const changePassword = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     const response = await axiosInstance.get("/users/current-user");
     // console.log(response.data);
-    return response.data;
+    return response.data.data;
 });
 
 const authSlice = createSlice({
@@ -109,7 +109,7 @@ const authSlice = createSlice({
         builder.addCase(userLogin.fulfilled, (state, action) => {
             state.loading = false;
             state.status = true;
-            state.userData = action.payload.data.user;
+            state.userData = action.payload;
         });
         builder.addCase(userLogout.pending, (state) => {
             state.loading = true;
@@ -125,7 +125,7 @@ const authSlice = createSlice({
         builder.addCase(getCurrentUser.fulfilled, (state, action) => {
             state.loading = false;
             state.status = true;
-            state.userData = action.payload.data;
+            state.userData = action.payload;
         });
         builder.addCase(getCurrentUser.rejected, (state) => {
             state.loading = false;
