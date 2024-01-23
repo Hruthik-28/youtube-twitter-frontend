@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const authStatus = useSelector((state) => state.auth.status);
+    const username = useSelector((state) => state.auth?.userData?.username);
     const profileImg = useSelector((state) => state.auth.userData?.avatar.url);
 
     const sidePanelItems = [
@@ -27,7 +28,7 @@ function Navbar() {
         {
             icon: <HiOutlineVideoCamera size={25} />,
             title: "My Content",
-            url: "/my-content",
+            url: `/channel/${username}`,
         },
         {
             icon: <MdOutlineContactSupport size={25} />,

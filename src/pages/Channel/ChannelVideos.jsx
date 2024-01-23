@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos } from "../../store/Slices/videoSlice";
 import { Link } from "react-router-dom";
 
-function MyChannelVideos() {
+function ChannelVideos() {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.auth?.userData?._id);
+    const userId = useSelector((state) => state.user?.profileData?._id);
     const videos = useSelector((state) => state.video?.videos?.docs);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function MyChannelVideos() {
                             title={video.title}
                             thumbnail={video.thumbnail?.url}
                             createdAt={video.createdAt}
-                            // views={video.}
+                            views={video.views}
                         />
                     </Link>
                 ))}
@@ -35,4 +35,4 @@ function MyChannelVideos() {
     );
 }
 
-export default MyChannelVideos;
+export default ChannelVideos;

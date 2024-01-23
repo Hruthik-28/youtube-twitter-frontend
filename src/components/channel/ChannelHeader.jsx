@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../index";
 
 function ChannelHeader({
@@ -8,20 +8,29 @@ function ChannelHeader({
     fullName,
     subscribersCount,
     subscribedCount,
+    isSubscribed,
 }) {
+    const [toogleSubscribe, setToggleSubscribe] = useState("");
+    if (isSubscribed) {
+        setToggleSubscribe(true);
+    }
+
+    useEffect(() => {
+    }, [toogleSubscribe]);
+    
     return (
         <>
             <div className="w-full text-white">
                 {/* coverImage section */}
                 <section className="w-full">
-                    {
-                        coverImage ?
+                    {coverImage ? (
                         <img
-                        src={coverImage}
-                        className="sm:h-40 h-28 w-full object-cover"
+                            src={coverImage}
+                            className="sm:h-40 h-28 w-full object-cover"
                         />
-                        : <div className="sm:h-40 h-28 w-full border-slate-600 border-b bg-black"></div>
-                    }
+                    ) : (
+                        <div className="sm:h-40 h-28 w-full border-slate-600 border-b bg-black"></div>
+                    )}
                 </section>
                 {/*channel details section  */}
                 <section className=" w-full sm:px-5 p-2 flex sm:flex-row flex-col items-start sm:gap-4">
@@ -48,14 +57,14 @@ function ChannelHeader({
                                 </p>
                             </div>
                         </div>
-                        <div>
-                            <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
-                                Edit
+                        <div onClick={() => setToggleSubscribe(prev => !prev)}>
+                            <Button 
+                                className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
+                                {toogleSubscribe ? "Subscribed" : "Subscribe"}
                             </Button>
                         </div>
                     </div>
                 </section>
-
             </div>
         </>
     );

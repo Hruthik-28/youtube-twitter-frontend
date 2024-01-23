@@ -9,7 +9,6 @@ function VideoList({
     avatar,
     channelName,
     createdAt,
-    channelId,
 }) {
     return (
         <>
@@ -23,9 +22,9 @@ function VideoList({
                         {formatDuration(duration)}
                     </span>
                 </div>
-                <div className="flex items-center py-1 px-2 gap-2">
+                <div className="flex items-center py-2 px-2 gap-2">
                     {avatar && (
-                        <Link to={`/${channelId}`}>
+                        <Link to={`/channel/${channelName}`}>
                             <img
                                 src={avatar}
                                 className="w-10 h-10 rounded-full object-cover"
