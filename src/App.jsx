@@ -9,6 +9,7 @@ import { getCurrentUser } from "./store/Slices/authSlice";
 import History from "./pages/History";
 import Channel from "./pages/Channel/Channel";
 import ChannelVideos from "./pages/Channel/ChannelVideos";
+import ChannelTweets from "./pages/Channel/ChannelTweets";
 
 function App() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
                     <Route path="/channel/:username" element={<Channel />}>
                         <Route path="videos" element={<ChannelVideos />}/>
                         <Route path="playlists" element={""}/>
-                        <Route path="tweets" element={""}/>
+                        <Route path="tweets" element={<ChannelTweets />}/>
                         <Route path="subscribed" element={""}/>
                     </Route>
                     <Route path="/history" element={<History />}/>

@@ -32,7 +32,6 @@ export const createAccount = createAsyncThunk("register", async (data) => {
 export const userLogin = createAsyncThunk("login", async (data) => {
     try {
         const response = await axiosInstance.post("/users/login", data);
-        console.log(response.data);
         return response.data.data.user;
     } catch (error) {
         toast.error(error?.response?.data?.error);
@@ -43,7 +42,6 @@ export const userLogin = createAsyncThunk("login", async (data) => {
 export const userLogout = createAsyncThunk("logout", async () => {
     try {
         const response = await axiosInstance.post("/users/logout");
-        // console.log(response.data);
         return response.data;
     } catch (error) {
         toast.error(error?.response?.data?.error);
@@ -59,7 +57,6 @@ export const refreshAccessToken = createAsyncThunk(
                 "/users/refresh-token",
                 data
             );
-            // console.log(response.data);
             return response.data;
         } catch (error) {
             toast.error(error?.response?.data?.error);
@@ -76,7 +73,6 @@ export const changePassword = createAsyncThunk(
                 "/users/change-password",
                 data
             );
-            // console.log(response.data);
             toast.success(response.data.data);
             return response.data;
         } catch (error) {
@@ -88,7 +84,6 @@ export const changePassword = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     const response = await axiosInstance.get("/users/current-user");
-    // console.log(response.data);
     return response.data.data;
 });
 
