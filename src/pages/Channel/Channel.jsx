@@ -25,8 +25,10 @@ function Channel() {
                 fullName={channel?.fullName}
                 subscribersCount={channel?.subscribersCount || 0}
             />
-            <ChannelNavigate username={username}/>
-            <Outlet />
+            <ChannelNavigate username={username} />
+            <div className="overflow-y-scroll h-[32rem] sm:h-96 mb-20 sm:mb-0">
+                <Outlet />
+            </div>
         </>
     );
 }

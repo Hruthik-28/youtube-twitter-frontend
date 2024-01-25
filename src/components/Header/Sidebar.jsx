@@ -73,7 +73,7 @@ function Sidebar() {
     return (
         <>
             <div className="sm:block hidden">
-                <div className="text-white lg:w-56 md:w-44 w-16 sm:p-3 p-2 border-slate-600 border-r h-[93vh] flex flex-col justify-between">
+                <div className="text-white lg:w-56 md:w-44 w-16 sm:p-3 p-2 border-slate-600 border-r h-screen flex flex-col justify-between">
                     <div className="flex flex-col gap-4 mt-5">
                         {sidebarTopItems.map((item) => (
                             <NavLink
