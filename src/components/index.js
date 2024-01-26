@@ -9,6 +9,8 @@ import Logo from "./Logo";
 import ChannelHeader from "./channel/ChannelHeader";
 import VideoList from "./VideoList";
 import SignUp from "./Signup";
-import Tweet from "./tweet";
+import TweetAndComment from "./TweetAndComment";
+import Video from "./Video";
+import CommentList from "./CommentsList";
 
-export { Button, Container, Input, Login, Navbar, Search, Sidebar, Logo, ChannelHeader, VideoList, SignUp, Tweet};
+export { Button, Container, Input, Login, Navbar, Search, Sidebar, Logo, ChannelHeader, VideoList, SignUp, TweetAndComment, Video, CommentList};

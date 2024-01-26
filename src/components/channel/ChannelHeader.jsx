@@ -6,8 +6,8 @@ function ChannelHeader({
     avatar,
     username,
     fullName,
-    subscribersCount,
-    subscribedCount,
+    subscribersCount=0,
+    subscribedCount=0,
     isSubscribed,
 }) {
     const [toogleSubscribe, setToggleSubscribe] = useState("");

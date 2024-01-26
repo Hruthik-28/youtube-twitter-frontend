@@ -1,19 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { timeAgo } from "../helpers/timeAgo";
+import { useSelector } from "react-redux";
 import Like from "./Like";
 
-function TweetList({
-    tweetId,
-    avatar,
-    username,
-    createdAt,
-    content,
-    likesCount = 0,
-    isLiked,
-}) {
-    const avatar2 = useSelector((state) => state.user?.profileData?.avatar.url);
-
+function CommentsList({ avatar, username, createdAt, content, commentId, isLiked, likesCount }) {
+    const avatar2 = useSelector((state) => state.auth?.userData?.avatar.url);
     return (
         <>
             <div className="text-white w-full flex borde justify-start items-center sm:gap-5 gap-3 border-b border-slate-600 p-3 sm:p-5">
@@ -34,8 +25,8 @@ function TweetList({
                     <Like
                         isLiked={isLiked}
                         likesCount={likesCount}
-                        tweetId={tweetId}
-                        size={20}
+                        commentId={commentId}
+                        size={17}
                     />
                 </div>
             </div>
@@ -43,4 +34,4 @@ function TweetList({
     );
 }
 
-export default TweetList;
+export default CommentsList;
