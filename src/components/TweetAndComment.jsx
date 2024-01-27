@@ -9,14 +9,12 @@ function TweetAndComment({ tweet, comment, videoId }) {
     const { register, handleSubmit, setValue } = useForm();
     const dispatch = useDispatch();
 
-    const sendContent = async (data) => {
+    const sendContent = (data) => {
         if (data) {
             if (tweet) {
-                await dispatch(createTweet(data));
+                dispatch(createTweet(data));
             } else if (comment) {
-                await dispatch(
-                    createAComment({ content: data.content, videoId })
-                );
+                dispatch(createAComment({ content: data.content, videoId }));
             }
             setValue("content", "");
         }
@@ -29,15 +27,14 @@ function TweetAndComment({ tweet, comment, videoId }) {
                 className="sm:p-5 p-3 sm:max-w-4xl w-full relative"
             >
                 <textarea
-                    placeholder={`${
-                        tweet ? "Write a tweet" : "Add a Comment"
-                    }`}
-                    className="sm:h-28 h-16 p-2 text-sm focus:border-white  text-white border border-slate-500 bg-[#222222] outline-none w-full"
+                    placeholder={`${tweet ? "Write a tweet" : "Add a Comment"}`}
+                    className="p-2 text-sm pr-16 focus:border-white text-white border border-slate-500 bg-[#222222] outline-none w-full"
                     {...register("content", { required: true })}
+                    rows={2}
                 />
                 <Button
                     type="submit"
-                    className="bg-purple-500 px-2 py-1 text-black hover:scale-110 transition-all ease-in absolute sm:bottom-10 sm:right-10 bottom-7 right-5 text-xs sm:text-base"
+                    className="bg-purple-500 px-2 py-1 text-black hover:scale-110 transition-all ease-in absolute sm:bottom-8 sm:right-8 bottom-8 right-4 text-xs sm:text-base"
                 >
                     Send
                 </Button>

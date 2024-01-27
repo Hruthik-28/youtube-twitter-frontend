@@ -7,7 +7,7 @@ function CommentsList({ avatar, username, createdAt, content, commentId, isLiked
     const avatar2 = useSelector((state) => state.auth?.userData?.avatar.url);
     return (
         <>
-            <div className="text-white w-full flex borde justify-start items-center sm:gap-5 gap-3 border-b border-slate-600 p-3 sm:p-5">
+            <div className="text-white w-full flex justify-start items-center sm:gap-5 gap-3 border-b border-slate-600 p-3 sm:p-5">
                 <div className="w-10">
                     <img
                         src={avatar || avatar2}

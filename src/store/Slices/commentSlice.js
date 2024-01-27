@@ -6,6 +6,8 @@ import { BASE_URL } from "../../constants";
 const initialState = {
     loading: false,
     comments: [],
+    totalComments: null,
+    hasNextPage: false
 };
 
 export const createAComment = createAsyncThunk(
@@ -65,7 +67,7 @@ export const getVideoComments = createAsyncThunk(
 
         try {
             const response = await axiosInstance.get(url);
-            return response.data.data.docs;
+            return response.data.data;
         } catch (error) {
             toast.error(error?.response?.data?.error);
             throw error;
@@ -83,10 +85,13 @@ const commentSlice = createSlice({
         });
         builder.addCase(getVideoComments.fulfilled, (state, action) => {
             state.loading = false;
-            state.comments = action.payload;
+            state.comments = action.payload.docs;
+            state.totalComments = action.payload.totalDocs;
+            state.hasNextPage = action.payload.hasNextPage;
         });
         builder.addCase(createAComment.fulfilled, (state, action) => {
             state.comments.unshift(action.payload);
+            state.totalComments ++;
         });
     },
 });

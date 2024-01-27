@@ -12,6 +12,7 @@ function VideoDetail() {
     const userId = useSelector((state) => state.auth?.userData?._id);
     const video = useSelector((state) => state.video?.video);
     const comments = useSelector((state) => state.comment?.comments);
+    const totalComments = useSelector((state) => state.comment?.totalComments);
 
     useEffect(() => {
         if (videoId && userId) {
@@ -43,11 +44,12 @@ function VideoDetail() {
                 videoId={video?._id}
                 channelId={video?.owner?._id}
             />
+            <div className="text-white font-semibold sm:px-5 px-3">{totalComments} Comments</div>
             <TweetAndComment
                 comment={true}
                 videoId={video?._id}
             />
-            <div className="w-full sm:max-w-4xl border-r">
+            <div className="w-full sm:max-w-4xl">
                 {comments?.map((comment) => (
                     <CommentList
                         key={comment?._id}
