@@ -7,7 +7,7 @@ import Search from "./Header/Search";
 import Sidebar from "./Header/Sidebar";
 import Logo from "./Logo";
 import ChannelHeader from "./channel/ChannelHeader";
-import ChannelNavigate from "./channel/ChannelNavigate"
+import ChannelNavigate from "./channel/ChannelNavigate";
 import VideoList from "./VideoList";
 import SignUp from "./Signup";
 import TweetAndComment from "./TweetAndComment";
@@ -18,5 +18,28 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import Like from "./Like";
 import Description from "./Description";
 import TweetList from "./TweetList";
+import Avatar from "./Avatar";
 
-export { Button, Container, Input, Login, Navbar, Search, Sidebar, Logo, ChannelHeader, VideoList, SignUp, TweetAndComment, Video, CommentList, Edit, DeleteConfirmation, Like, Description, TweetList, ChannelNavigate};
+export {
+    Button,
+    Container,
+    Input,
+    Login,
+    Navbar,
+    Search,
+    Sidebar,
+    Logo,
+    ChannelHeader,
+    VideoList,
+    SignUp,
+    TweetAndComment,
+    Video,
+    CommentList,
+    Edit,
+    DeleteConfirmation,
+    Like,
+    Description,
+    TweetList,
+    ChannelNavigate,
+    Avatar
+};

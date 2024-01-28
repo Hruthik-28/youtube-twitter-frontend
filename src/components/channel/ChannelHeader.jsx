@@ -1,23 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../index";
+import { useDispatch } from "react-redux";
+import { toggleSubscription } from "../../store/Slices/subscriptionSlice";
 
 function ChannelHeader({
     coverImage,
     avatar,
     username,
     fullName,
-    subscribersCount=0,
-    subscribedCount=0,
+    subscribersCount = 0,
+    subscribedCount = 0,
     isSubscribed,
+    channelId,
 }) {
-    const [toogleSubscribe, setToggleSubscribe] = useState("");
-    if (isSubscribed) {
-        setToggleSubscribe(true);
-    }
+    const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed);
+    const [localSubscribersCount, setLocalSubscribersCount] =
+        useState(subscribersCount);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-    }, [toogleSubscribe]);
-    
+    const handleSubscribe = () => {
+        dispatch(toggleSubscription(channelId));
+        setLocalIsSubscribed((prev) => !prev);
+        if (localIsSubscribed) {
+            setLocalSubscribersCount((prev) => prev - 1);
+        } else {
+            setLocalSubscribersCount((prev) => prev + 1);
+        }
+    };
+
     return (
         <>
             <div className="w-full text-white">
@@ -50,19 +60,19 @@ function ChannelHeader({
                             </h3>
                             <div className="flex gap-1">
                                 <p className="text-xs text-slate-400">
-                                    {subscribersCount} Subscribers
+                                    {localSubscribersCount} Subscribers
                                 </p>
                                 <p className="text-xs text-slate-400">
                                     {subscribedCount} Subscribed
                                 </p>
                             </div>
                         </div>
-                        <div onClick={() => setToggleSubscribe(prev => !prev)}>
-                            <Button 
-                                className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
-                                {toogleSubscribe ? "Subscribed" : "Subscribe"}
-                            </Button>
-                        </div>
+                        <Button
+                            onClick={handleSubscribe}
+                            className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500"
+                        >
+                            {localIsSubscribed ? "Subscribed" : "Subscribe"}
+                        </Button>
                     </div>
                 </section>
             </div>
