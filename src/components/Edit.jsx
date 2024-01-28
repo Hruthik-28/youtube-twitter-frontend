@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditComment({ initialContent, onCancel, onSave }) {
+function Edit({ initialContent, onCancel, onSave }) {
     const [editedContent, setEditedContent] = useState(initialContent);
 
     const handleSave = () => {
@@ -33,4 +33,4 @@ function EditComment({ initialContent, onCancel, onSave }) {
     );
 }
 
-export default EditComment;
+export default Edit;

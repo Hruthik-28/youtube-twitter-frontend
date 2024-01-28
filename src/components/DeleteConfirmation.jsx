@@ -1,9 +1,12 @@
 import React from "react";
 
-function DeleteConfirmation({ onCancel, onDelete }) {
+function DeleteConfirmation({ onCancel, onDelete, comment, tweet }) {
     return (
         <div className="text-center space-y-5 sm:p-5 p-3 bg-black border-slate-700 border rounded-xl">
-            <h1 className="text-base">Delete this Comment Permanently?</h1>
+            <h1 className="text-base">
+                Delete this {`${comment ? "Comment": ""} ${tweet ? "Tweet": ""}`}{" "}
+                Permanently?
+            </h1>
             <div className="font-normal flex gap-2 justify-center">
                 <button
                     onClick={onCancel}

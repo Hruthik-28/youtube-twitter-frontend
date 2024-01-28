@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTweets } from "../../store/Slices/tweetSlice";
-import TweetList from "../../components/tweetList";
+import TweetList from "../../components/TweetList";
 import { TweetAndComment } from "../../components";
 
 function ChannelTweets() {

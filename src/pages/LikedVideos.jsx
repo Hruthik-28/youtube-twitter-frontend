@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLikedVideos } from "../store/Slices/likeSlice";
 import HomeSkeleton from "../skeleton/HomeSkeleton";
 import { Link } from "react-router-dom";
-import { VideoList } from "../components";
+import { Container, VideoList } from "../components";
 
 function LikedVideos() {
     const dispatch = useDispatch();
@@ -20,23 +20,27 @@ function LikedVideos() {
 
     return (
         <>
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white mb-20 sm:mb-0">
-                {likedVideos?.map((video) => (
-                    <Link
-                        to={`/watch/${video.likedVideo._id}`}
-                        key={video.likedVideo._id}
-                    >
-                        <VideoList
-                            avatar={video.likedVideo.ownerDetails?.avatar?.url}
-                            duration={video.likedVideo.duration}
-                            title={video.likedVideo.title}
-                            thumbnail={video.likedVideo.thumbnail?.url}
-                            createdAt={video.likedVideo.createdAt}
-                            views={video.likedVideo.views}
-                        />
-                    </Link>
-                ))}
-            </div>
+            <Container>
+                <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white mb-20 sm:mb-0">
+                    {likedVideos?.map((video) => (
+                        <Link
+                            to={`/watch/${video.likedVideo._id}`}
+                            key={video.likedVideo._id}
+                        >
+                            <VideoList
+                                avatar={
+                                    video.likedVideo.ownerDetails?.avatar?.url
+                                }
+                                duration={video.likedVideo.duration}
+                                title={video.likedVideo.title}
+                                thumbnail={video.likedVideo.thumbnail?.url}
+                                createdAt={video.likedVideo.createdAt}
+                                views={video.likedVideo.views}
+                            />
+                        </Link>
+                    ))}
+                </div>
+            </Container>
         </>
     );
 }
