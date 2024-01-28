@@ -11,6 +11,7 @@ import { IoFolderOutline } from "react-icons/io5";
 import { RiHome6Line } from "react-icons/ri";
 import { BiSolidLike } from "react-icons/bi";
 import { BiSolidDislike } from "react-icons/bi";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 export {
     IoCloseCircleOutline,
@@ -25,5 +26,6 @@ export {
     RiHome6Line,
     TbUserCheck,
     BiSolidLike,
-    BiSolidDislike
+    BiSolidDislike,
+    HiOutlineDotsVertical
 }
