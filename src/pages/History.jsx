@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, VideoList } from "../components";
+import { Container, NoVideosFound, VideoList } from "../components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWatchHistory } from "../store/Slices/userSlice";
@@ -15,6 +15,10 @@ function History() {
 
     if (loading) {
         return <HomeSkeleton />
+    }
+
+    if (videos?.length == 0) {
+        return <NoVideosFound />
     }
 
     if (videos && videos.length > 0) {

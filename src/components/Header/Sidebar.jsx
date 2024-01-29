@@ -42,8 +42,8 @@ function Sidebar() {
         },
         {
             icon: <TbUserCheck size={25} />,
-            title: "Subscribers",
-            url: "/subscribers",
+            title: "Subscriptions",
+            url: "/subscriptions",
         },
     ];
 
@@ -65,8 +65,8 @@ function Sidebar() {
         },
         {
             icon: <TbUserCheck size={25} />,
-            title: "Subscribers",
-            url: "/subscribers",
+            title: "Subscriptions",
+            url: "/subscriptions",
         },
     ];
 

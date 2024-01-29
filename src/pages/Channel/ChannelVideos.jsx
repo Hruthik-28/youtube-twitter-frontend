@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { VideoList } from "../../components/index";
+import { NoVideosFound, VideoList } from "../../components/index";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos } from "../../store/Slices/videoSlice";
 import { Link } from "react-router-dom";
@@ -12,6 +12,11 @@ function ChannelVideos() {
     useEffect(() => {
         dispatch(getAllVideos(userId));
     }, [dispatch, userId]);
+
+    if (videos?.length == 0) {
+        return <NoVideosFound />
+    }
+    
     return (
         <>
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white">

@@ -19,6 +19,7 @@ import Like from "./Like";
 import Description from "./Description";
 import TweetList from "./TweetList";
 import Avatar from "./Avatar";
+import NoVideosFound from "./NoVideosFound";
 
 export {
     Button,
@@ -41,5 +42,6 @@ export {
     Description,
     TweetList,
     ChannelNavigate,
-    Avatar
+    Avatar,
+    NoVideosFound
 };
