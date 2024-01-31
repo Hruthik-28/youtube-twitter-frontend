@@ -6,6 +6,7 @@ import subscriptionSlice from "./Slices/subscriptionSlice.js";
 import likeSlice from "./Slices/likeSlice.js";
 import tweetSlice from "./Slices/tweetSlice.js";
 import commentSlice from "./Slices/commentSlice.js";
+import dashboardSlice from "./Slices/dashboard.js";
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         like: likeSlice,
         tweet: tweetSlice,
         comment: commentSlice,
+        dashboard: dashboardSlice
     }
 });
 
