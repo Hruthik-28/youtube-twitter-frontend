@@ -14,6 +14,7 @@ import LikedVideos from "./pages/LikedVideos";
 import VideoDetail from "./pages/VideoDetail";
 import ChannelSubscribers from "./pages/Channel/ChannelSubscribers";
 import MySubscriptions from "./pages/MySubscriptions";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
             <Route path="/login" element={<Login />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/watch/:videoId" element={<VideoDetail />}/>
+            <Route path="/collections" element={<AdminDashboard />}/>
             </Routes>
             
             <Toaster
