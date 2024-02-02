@@ -51,7 +51,7 @@ const dashboardSlice = createSlice({
         });
         builder.addCase(getChannelVideos.fulfilled, (state, action) => {
             state.loading = false;
-            state.channelStats = action.payload;
+            state.channelVideos = action.payload;
         });
         
     },

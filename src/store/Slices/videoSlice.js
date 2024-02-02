@@ -5,6 +5,7 @@ import { BASE_URL } from "../../constants";
 
 const initialState = {
     loading: false,
+    uploading: true,
     isPublished: null,
     video: null,
 };
@@ -38,7 +39,7 @@ export const publishAvideo = createAsyncThunk("publishAvideo", async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
-    formData.append("videoFile", data.videoFile);
+    formData.append("videoFile", data.videoFile[0]);
     formData.append("thumbnail", data.thumbnail[0]);
 
     try {
@@ -129,9 +130,11 @@ const videoSlice = createSlice({
         });
         builder.addCase(publishAvideo.pending, (state) => {
             state.loading = true;
+            state.uploading = true;
         });
         builder.addCase(publishAvideo.fulfilled, (state) => {
             state.loading = false;
+            state.uploading = false;
         });
         builder.addCase(updateAVideo.pending, (state) => {
             state.loading = true;

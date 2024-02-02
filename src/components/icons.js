@@ -27,5 +27,5 @@ export {
     TbUserCheck,
     BiSolidLike,
     BiSolidDislike,
-    HiOutlineDotsVertical
+    HiOutlineDotsVertical,
 }

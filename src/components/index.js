@@ -20,6 +20,8 @@ import Description from "./Description";
 import TweetList from "./TweetList";
 import Avatar from "./Avatar";
 import NoVideosFound from "./NoVideosFound";
+import Input2 from "./Input2";
+import Spinner from "./Spinner"
 
 export {
     Button,
@@ -43,5 +45,7 @@ export {
     TweetList,
     ChannelNavigate,
     Avatar,
-    NoVideosFound
+    NoVideosFound,
+    Input2,
+    Spinner
 };
