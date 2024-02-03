@@ -43,10 +43,7 @@ function UploadingVideo({
                     <IoCloseCircleOutline
                         size={25}
                         className="cursor-pointer"
-                        onClick={() => setUploadVideoPopup((prev) => ({
-                            ...prev,
-                            uploadVideo: false
-                        }))}
+                        onClick={handleCancelAndFinish}
                     />
                 </div>
                 <div className="border flex justify-start items-center p-1">

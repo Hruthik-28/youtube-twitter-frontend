@@ -55,6 +55,7 @@ export const publishAvideo = createAsyncThunk("publishAvideo", async (data) => {
 });
 
 export const updateAVideo = createAsyncThunk("updateAVideo", async ({videoId, data}) => {
+
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -143,11 +144,9 @@ const videoSlice = createSlice({
             state.uploaded = true;
         });
         builder.addCase(updateAVideo.pending, (state) => {
-            state.loading = true;
             state.uploading = true;
         });
         builder.addCase(updateAVideo.fulfilled, (state) => {
-            state.loading = false;
             state.uploading = false;
             state.uploaded = true;
         });
