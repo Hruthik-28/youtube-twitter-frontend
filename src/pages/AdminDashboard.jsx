@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Navbar } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegEye, FaRegHeart } from "react-icons/fa";
-import { RxAvatar } from "react-icons/rx";
-import TogglePublish from "../components/TogglePublish";
-import { MdOutlineSlowMotionVideo } from "react-icons/md";
+import { TogglePublish, UploadVideo } from "../components";
+import {
+    MdOutlineSlowMotionVideo,
+    ImBin,
+    GrEdit,
+    RxAvatar,
+    FaRegEye,
+    FaRegHeart,
+} from "../components/icons";
 import { getChannelStats, getChannelVideos } from "../store/Slices/dashboard";
-import UploadVideo from "../components/UploadVideo";
+import EditVideo from "../components/EditVideo";
 
 function AdminDashboard() {
     const username = useSelector((state) => state.auth.userData?.username);
     const dashboard = useSelector((state) => state.dashboard.channelStats);
     const videos = useSelector((state) => state.dashboard.channelVideos);
+    const uploaded = useSelector((state) => state.video.uploaded);
+    const publishToggled = useSelector((state) => state.video.publishToggled);
+
     const dispatch = useDispatch();
-    const [uploadVideoPopup, setUploadVideoPopup] = useState(false);
+    const [videoDetails, setVideoDetails] = useState(null);
+    const [popUp, setPopUp] = useState({
+        uploadVideo: false,
+        editVideo: false,
+        deleteVideo: false,
+    });
 
     useEffect(() => {
         dispatch(getChannelStats());
-        dispatch(getChannelVideos());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getChannelVideos());
+    }, [dispatch, uploaded, publishToggled]);
 
     return (
         <>
@@ -26,13 +42,24 @@ function AdminDashboard() {
             <Container>
                 <div className=" w-full relative h-screen text-white space-y-5 z-10">
                     {/* uploadVideoPopup */}
-                    {uploadVideoPopup && (
+                    {popUp.uploadVideo && (
                         <div className="absolute w-full z-20">
-                            <UploadVideo setUploadVideoPopup={setUploadVideoPopup}/>
+                            <UploadVideo setUploadVideoPopup={setPopUp} />
                         </div>
                     )}
 
+                    {popUp.editVideo && (
+                        <div className="w-full flex justify-center absolute z-20">
+                            <EditVideo
+                                setEditVideoPopup={setPopUp}
+                                title={videoDetails?.title}
+                                description={videoDetails?.description}
+                                videoId={videoDetails?._id}
+                            />
+                        </div>
+                    )}
 
+                    {/* Dashboard Header */}
                     <section className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                         <div>
                             <h1 className="sm:text-2xl text-xl font-bold">
@@ -47,7 +74,10 @@ function AdminDashboard() {
                                 className="bg-purple-500 p-2 font-semibold"
                                 textColor="text-black"
                                 onClick={() =>
-                                    setUploadVideoPopup((prev) => !prev)
+                                    setPopUp((prev) => ({
+                                        ...prev,
+                                        uploadVideo: !prev.uploadVideo,
+                                    }))
                                 }
                             >
                                 {" "}
@@ -100,6 +130,7 @@ function AdminDashboard() {
                         </div>
                     </section>
 
+                    {/* Table for managing channel videos */}
                     <section className="mx-auto w-full overflow-x-scroll">
                         <table className="min-w-full border border-slate-500">
                             <thead>
@@ -145,13 +176,42 @@ function AdminDashboard() {
                                         <td className="py-2 px-4 border-b border-slate-500">
                                             {video?.title}
                                         </td>
-                                        <td className="py-2 px-4 border-b border-slate-500">
-                                            {video?.likesCount} likes
+                                        <td className="border-b border-slate-500">
+                                            <span className="border rounded-lg outline-none px-2 bg-green-200 text-green-600">
+                                                {video?.likesCount} likes
+                                            </span>
                                         </td>
                                         <td className="py-2 px-4 border-b border-slate-500">
                                             {video?.createdAt?.day}/
                                             {video?.createdAt?.month}/
                                             {video?.createdAt?.year}
+                                        </td>
+                                        <td className="py-2 border-b border-slate-500">
+                                            <span className="flex gap-3 justify-start">
+                                                <ImBin
+                                                    size={20}
+                                                    className="cursor-pointer"
+                                                    onClick={() =>
+                                                        setPopUp((prev) => ({
+                                                            ...prev,
+                                                            deleteVideo:
+                                                                !prev.deleteVideo,
+                                                        }))
+                                                    }
+                                                />
+                                                <GrEdit
+                                                    size={20}
+                                                    className="cursor-pointer"
+                                                    onClick={() => {
+                                                        setPopUp((prev) => ({
+                                                            ...prev,
+                                                            editVideo:
+                                                                !prev.editVideo,
+                                                        }));
+                                                        setVideoDetails(video);
+                                                    }}
+                                                />
+                                            </span>
                                         </td>
                                     </tr>
                                 ))}

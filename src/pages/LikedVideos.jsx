@@ -40,6 +40,7 @@ function LikedVideos() {
                                 thumbnail={video.likedVideo.thumbnail?.url}
                                 createdAt={video.likedVideo.createdAt}
                                 views={video.likedVideo.views}
+                                channelName={video.likedVideo.ownerDetails?.username}
                             />
                         </Link>
                     ))}
