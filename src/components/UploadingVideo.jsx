@@ -2,21 +2,36 @@ import React from "react";
 import { PiFilmReelFill } from "react-icons/pi";
 import Spinner from "./Spinner";
 import Button from "./Button";
-import { IoCloseCircleOutline } from "./icons";
+import { IoCloseCircleOutline, TiTick } from "./icons";
+import { useDispatch } from "react-redux";
+import { updateUploadState } from "../store/Slices/videoSlice";
 
 function UploadingVideo({
-    videoFileName = "Dashboard prototype recording.mp4",
-    fileSize = "16MB",
+    videoFileName,
+    fileSize,
     setUploadVideoPopup,
+    uploaded,
 }) {
+    const dispatch = useDispatch();
+
+    const handleCancelAndFinish = () => {
+        setUploadVideoPopup((prev) => !prev);
+        dispatch(updateUploadState());
+    };
     return (
         <>
-            <div className="w-1/4 p-3 text-white border outline-none rounded-lg space-y-5 border-slate-700 bg-black">
+            <div className="w-96 p-3 text-white border outline-none rounded-lg space-y-5 border-slate-700 bg-black">
                 <div className="flex items-start justify-between">
                     <div>
-                        <h1 className="text-lg font-bold">
-                            Uploading Video...
-                        </h1>
+                        {uploaded ? (
+                            <h1 className="text-lg font-bold">
+                                Uploaded Video
+                            </h1>
+                        ) : (
+                            <h1 className="text-lg font-bold">
+                                Uploading Video...
+                            </h1>
+                        )}
                         <span className="text-xs text-slate-400">
                             Track your video uploading process.
                         </span>
@@ -38,24 +53,38 @@ function UploadingVideo({
                         <h1 className="text-sm font-semibold">
                             {videoFileName}
                         </h1>
-                        <p className="text-xs">{fileSize}</p>
+                        <p className="text-xs">{fileSize} MB</p>
                         <div className="flex gap-2 items-center mt-2">
-                            <Spinner />
-                            <span className="text-xs">Loading ...</span>
+                            {uploaded ? (
+                                <>
+                                    <span className="text-xs flex items-center">
+                                        <TiTick
+                                            size={25}
+                                            className="text-purple-500"
+                                        />
+                                        Uploaded Successfully
+                                    </span>
+                                </>
+                            ) : (
+                                <>
+                                    <Spinner />
+                                    <span className="text-xs">Loading ...</span>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <Button
                         className="border flex-1 p-2"
-                        onClick={() => setUploadVideoPopup((prev) => !prev)}
+                        onClick={handleCancelAndFinish}
                     >
                         Cancel
                     </Button>
                     <Button
                         className="flex-1 bg-purple-500 p-2"
                         textColor="text-black"
-                        onClick={() => setUploadVideoPopup((prev) => !prev)}
+                        onClick={handleCancelAndFinish}
                     >
                         Finish
                     </Button>
