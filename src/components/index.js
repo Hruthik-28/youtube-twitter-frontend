@@ -25,6 +25,10 @@ import Spinner from "./Spinner"
 import UploadVideo from "./UploadVideo";
 import UploadingVideo from "./UploadingVideo";
 import TogglePublish from "./TogglePublish";
+import HeaderSection from "./dashboard/HeaderSection";
+import StatsSection from "./dashboard/StatsSection";
+import VideoTable from "./dashboard/VideoTable";
+import EditVideo from "./EditVideo";
 
 export {
     Button,
@@ -53,5 +57,9 @@ export {
     Spinner,
     UploadVideo,
     UploadingVideo,
-    TogglePublish
+    TogglePublish,
+    HeaderSection,
+    StatsSection,
+    VideoTable,
+    EditVideo
 };

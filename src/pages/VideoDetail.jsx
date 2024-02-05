@@ -9,17 +9,16 @@ import { getVideoComments } from "../store/Slices/commentSlice";
 function VideoDetail() {
     const dispatch = useDispatch();
     const { videoId } = useParams();
-    const userId = useSelector((state) => state.auth?.userData?._id);
     const video = useSelector((state) => state.video?.video);
     const comments = useSelector((state) => state.comment?.comments);
     const totalComments = useSelector((state) => state.comment?.totalComments);
 
     useEffect(() => {
-        if (videoId && userId) {
-            dispatch(getVideoById({ videoId, userId }));
+        if (videoId ) {
+            dispatch(getVideoById({ videoId }));
             dispatch(getVideoComments({ videoId }));
         }
-    }, [dispatch, videoId, userId]);
+    }, [dispatch, videoId]);
 
     return (
         <>
