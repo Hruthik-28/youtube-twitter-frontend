@@ -32,19 +32,7 @@ export const getWatchHistory = createAsyncThunk("getWatchHistory", async () => {
     }
 });
 
-export const updateUserDetails = createAsyncThunk(
-    "updateUserDetails",
-    async (data) => {
-        try {
-            const response = await axiosInstance("/users/update-user", data);
-            toast.success("Updated details successfully!!!");
-            return response.data.data;
-        } catch (error) {
-            toast.error(error?.response?.data?.error);
-            throw error;
-        }
-    }
-);
+
 
 const userSlice = createSlice({
     name: "user",
@@ -64,13 +52,6 @@ const userSlice = createSlice({
         builder.addCase(getWatchHistory.fulfilled, (state, action) => {
             state.loading = false;
             state.history = action.payload;
-        });
-        builder.addCase(updateUserDetails.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(updateUserDetails.fulfilled, (state, action) => {
-            state.loading = false;
-            state.profileData = action.payload;
         });
     },
 });

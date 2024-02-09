@@ -16,8 +16,6 @@ export const createAccount = createAsyncThunk("register", async (data) => {
     formData.append("password", data.password);
     formData.append("fullName", data.fullName);
 
-    
-
     try {
         const response = await axiosInstance.post("/users/register", formData);
         console.log(response.data);
@@ -73,7 +71,7 @@ export const changePassword = createAsyncThunk(
                 "/users/change-password",
                 data
             );
-            toast.success(response.data.data);
+            toast.success(response.data?.message);
             return response.data;
         } catch (error) {
             toast.error(error?.response?.data?.error);
@@ -89,7 +87,10 @@ export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
 
 export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {
     try {
-        const response = await axiosInstance.patch("/users/update-avatar", avatar);
+        const response = await axiosInstance.patch(
+            "/users/update-avatar",
+            avatar
+        );
         toast.success("Updated details successfully!!!");
         return response.data.data;
     } catch (error) {
@@ -108,6 +109,23 @@ export const updateCoverImg = createAsyncThunk(
             );
             toast.success(response.data?.message);
             return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
+export const updateUserDetails = createAsyncThunk(
+    "updateUserDetails",
+    async (data) => {
+        try {
+            const response = await axiosInstance.patch(
+                "/users/update-user",
+                data
+            );
+            toast.success("Updated details successfully!!!");
+            return response.data;
         } catch (error) {
             toast.error(error?.response?.data?.error);
             throw error;
@@ -174,6 +192,13 @@ const authSlice = createSlice({
         });
         builder.addCase(updateCoverImg.rejected, (state) => {
             state.loading = false;
+        });
+        builder.addCase(updateUserDetails.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(updateUserDetails.fulfilled, (state, action) => {
+            state.loading = false;
+            state.userData = action.payload;
         });
     },
 });

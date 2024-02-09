@@ -1,6 +1,7 @@
 import React from "react";
-import { ChannelHeader, Spinner } from "../components";
+import { ChannelHeader, ChannelNavigate, Spinner } from "../components";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 function EditChannel() {
     const channel = useSelector((state) => state.auth?.userData);
@@ -32,6 +33,10 @@ function EditChannel() {
                     edit={true}
                 />
             )}
+            <ChannelNavigate edit={true} />
+            <div className="overflow-y-scroll h-[32rem] sm:h-96 mb-20 sm:mb-0">
+                <Outlet />
+            </div>
         </>
     );
 }

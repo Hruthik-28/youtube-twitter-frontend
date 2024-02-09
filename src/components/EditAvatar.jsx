@@ -16,7 +16,7 @@ function EditAvatar({ cover }) {
     const upload = (data) => {
         setIsOpen(false);
         const formData = new FormData();
-        formData.append(`${cover ? "coverImage" : "Avatar"}`, data.avatar[0]);
+        formData.append(`${cover ? "coverImage" : "avatar"}`, data.avatar[0]);
 
         if (data) {
             if (cover) {
