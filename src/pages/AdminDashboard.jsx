@@ -53,9 +53,7 @@ function AdminDashboard() {
                 <div className=" w-full relative h-screen text-white space-y-5 z-10">
                     {/* uploadVideoPopup */}
                     {popUp.uploadVideo && (
-                        <div className="absolute w-full z-20">
-                            <UploadVideo setUploadVideoPopup={setPopUp} />
-                        </div>
+                        <UploadVideo setUploadVideoPopup={setPopUp} />
                     )}
 
                     {/* editVideoPopup */}
