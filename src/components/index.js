@@ -21,7 +21,7 @@ import TweetList from "./TweetList";
 import Avatar from "./Avatar";
 import NoVideosFound from "./NoVideosFound";
 import Input2 from "./Input2";
-import Spinner from "./Spinner"
+import Spinner from "./Spinner";
 import UploadVideo from "./UploadVideo";
 import UploadingVideo from "./UploadingVideo";
 import TogglePublish from "./TogglePublish";
@@ -29,6 +29,10 @@ import HeaderSection from "./dashboard/HeaderSection";
 import StatsSection from "./dashboard/StatsSection";
 import VideoTable from "./dashboard/VideoTable";
 import EditVideo from "./EditVideo";
+import EditPersonalInfo from "./EditPersonalInfo";
+import ChangePassword from "./ChangePassword";
+import Layout from "../Layout";
+import EditAvatar from "./EditAvatar";
 
 export {
     Button,
@@ -61,5 +65,9 @@ export {
     HeaderSection,
     StatsSection,
     VideoTable,
-    EditVideo
+    EditVideo,
+    ChangePassword,
+    EditPersonalInfo,
+    Layout,
+    EditAvatar,
 };

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../index";
+import { Button, EditAvatar } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSubscription } from "../../store/Slices/subscriptionSlice";
-import EditAvatar from "../EditAvatar";
 import { Link } from "react-router-dom";
 
 function ChannelHeader({
@@ -88,8 +87,8 @@ function ChannelHeader({
                                         `${localSubscribersCount} Subscribers`}
                                 </p>
                                 <p className="text-xs text-slate-400">
-                                    {subscribedCount &&
-                                        `${subscribedCount} Subscribed`}
+                                    {subscribedCount && `${subscribedCount}`}{" "}
+                                    Subscribed
                                 </p>
                             </div>
                         </div>

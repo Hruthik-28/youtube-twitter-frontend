@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserChannelSubscribers } from "../../store/Slices/subscriptionSlice";
-import Avatar from "../../components/Avatar";
-import { Button } from "../../components";
+import { Avatar, Button } from "../../components";
 import { Link } from "react-router-dom";
 
 function ChannelSubscribers() {

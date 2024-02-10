@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getVideoById } from "../store/Slices/videoSlice";
-import { CommentList, TweetAndComment, Video } from "../components";
-import Description from "../components/Description";
+import { CommentList, TweetAndComment, Video, Description } from "../components";
 import { getVideoComments } from "../store/Slices/commentSlice";
 
 function VideoDetail() {
@@ -20,6 +19,7 @@ function VideoDetail() {
         }
     }, [dispatch, videoId]);
 
+    window.scrollTo(0, 0);
     return (
         <>
             <div className="">

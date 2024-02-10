@@ -1,16 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Avatar({ src, channelName }) {
+    const navigate = useNavigate();
+
+    const handleAvatarClick = (e) => {
+        e.stopPropagation()
+        navigate(`/channel/${channelName}`);
+    };
     return (
         <>
-            <Link to={`/channel/${channelName}`}>
-                <img
-                    src={src}
-                    alt="avatar"
-                    className="w-8 h-8 rounded-full object-cover"
-                />
-            </Link>
+            <img
+                src={src}
+                alt="avatar"
+                className="w-8 h-8 rounded-full object-cover"
+                onClick={handleAvatarClick}
+            />
         </>
     );
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { PiFilmReelFill } from "react-icons/pi";
-import Spinner from "./Spinner";
-import Button from "./Button";
+import {Spinner, Button} from "./index";
 import { IoCloseCircleOutline, TiTick } from "./icons";
 import { useDispatch } from "react-redux";
 import { updateUploadState } from "../store/Slices/videoSlice";

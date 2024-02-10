@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 function EditChannel() {
     const channel = useSelector((state) => state.auth?.userData);
     const loading = useSelector((state) => state.auth?.loading);
-
+    window.scrollTo(0, 0);
     return (
         <>
             {loading && (

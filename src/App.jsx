@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./Layout";
-import HomePage from "./pages/HomePage";
 import {Login, SignUp} from "./components/index";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/Slices/authSlice";
-import History from "./pages/History";
-import Channel from "./pages/Channel/Channel";
-import ChannelVideos from "./pages/Channel/ChannelVideos";
-import ChannelTweets from "./pages/Channel/ChannelTweets";
-import LikedVideos from "./pages/LikedVideos";
-import VideoDetail from "./pages/VideoDetail";
-import ChannelSubscribers from "./pages/Channel/ChannelSubscribers";
-import MySubscriptions from "./pages/MySubscriptions";
-import AdminDashboard from "./pages/AdminDashboard";
-import EditChannel from "./pages/EditChannel";
-import EditPersonalInfo from "./components/EditPersonalInfo";
-import ChangePassword from "./components/ChangePassword";
+import {
+    History,
+    Channel,
+    ChannelVideos,
+    ChannelTweets,
+    LikedVideos,
+    VideoDetail,
+    ChannelSubscribers,
+    MySubscriptions,
+    AdminDashboard,
+    EditChannel,
+    HomePage
+} from "./pages";
+import {EditPersonalInfo, ChangePassword, Layout} from "./components";
 
 function App() {
     const dispatch = useDispatch();

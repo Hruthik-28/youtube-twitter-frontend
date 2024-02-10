@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { ChannelHeader } from "../../components/index";
+import { ChannelHeader, ChannelNavigate } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { userChannelProfile } from "../../store/Slices/userSlice.js";
-import ChannelNavigate from "../../components/channel/ChannelNavigate.jsx";
 import { Outlet, useParams } from "react-router-dom";
 
 function Channel() {
