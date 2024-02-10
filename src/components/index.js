@@ -17,7 +17,7 @@ import Edit from "./Edit";
 import DeleteConfirmation from "./DeleteConfirmation";
 import Like from "./Like";
 import Description from "./Description";
-import TweetList from "./TweetList";
+import TweetsList from "./TweetsList";
 import Avatar from "./Avatar";
 import NoVideosFound from "./NoVideosFound";
 import Input2 from "./Input2";
@@ -53,7 +53,7 @@ export {
     DeleteConfirmation,
     Like,
     Description,
-    TweetList,
+    TweetsList,
     ChannelNavigate,
     Avatar,
     NoVideosFound,
