@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVideos } from "../store/Slices/videoSlice";
+import { getAllVideos, makeVideosNull } from "../store/Slices/videoSlice";
 import { VideoList, Container } from "../components";
 import HomeSkeleton from "../skeleton/HomeSkeleton";
 
@@ -10,7 +10,9 @@ function HomePage() {
     const loading = useSelector((state) => state.video?.loading);
 
     useEffect(() => {
-        dispatch(getAllVideos());
+        dispatch(getAllVideos({}));
+
+        return () => dispatch(makeVideosNull())
     }, [dispatch]);
 
     if (loading) {
@@ -18,7 +20,7 @@ function HomePage() {
     }
     return (
         <Container>
-            <div className="text-white mb-20 sm:mb-0 w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-y-scroll">
+            <div className="text-white max-h-screen mb-20 sm:m-0 w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-y-scroll">
                 {videos?.map((video) => (
                     <VideoList
                         key={video._id}

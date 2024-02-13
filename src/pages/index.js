@@ -9,6 +9,7 @@ import HomePage from "./HomePage";
 import LikedVideos from "./LikedVideos";
 import MySubscriptions from "./MySubscriptions";
 import VideoDetail from "./VideoDetail";
+import SearchVideos from "./SearchVideos";
 
 export {
     Channel,
@@ -21,5 +22,6 @@ export {
     HomePage,
     LikedVideos,
     MySubscriptions,
-    VideoDetail
+    VideoDetail,
+    SearchVideos
 }
