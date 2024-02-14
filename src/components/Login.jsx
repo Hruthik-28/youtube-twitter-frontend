@@ -15,7 +15,7 @@ function Login() {
     } = useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const loading = useSelector(state => state.auth?.loading);
+    const loading = useSelector((state) => state.auth?.loading);
 
     const submit = async (data) => {
         const isEmail = data.username.includes("@");
@@ -31,7 +31,7 @@ function Login() {
     };
 
     if (loading) {
-        return <LoginSkeleton />
+        return <LoginSkeleton />;
     }
 
     return (
@@ -51,11 +51,11 @@ function Login() {
                             type="text"
                             placeholder="example@gmail.com"
                             {...register("username", {
-                                required: true,
+                                required: "username is required",
                             })}
                         />
                         {errors.username && (
-                            <span className="text-white">
+                            <span className="text-red-500">
                                 {errors.username.message}
                             </span>
                         )}
@@ -64,7 +64,7 @@ function Login() {
                             type="password"
                             placeholder="1kd074fjw0"
                             {...register("password", {
-                                required: true,
+                                required: "password is required",
                             })}
                         />
                         {errors.password && (

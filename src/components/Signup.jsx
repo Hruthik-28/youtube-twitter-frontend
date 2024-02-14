@@ -2,9 +2,10 @@ import React from "react";
 import { Logo, Button, Input } from "./index";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { createAccount } from "../store/Slices/authSlice.js";
+import { createAccount, userLogin } from "../store/Slices/authSlice.js";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LoginSkeleton from "../skeleton/loginSkeleton.jsx";
 
 function SignUp() {
     const {
@@ -14,11 +15,28 @@ function SignUp() {
     } = useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const loading = useSelector((state) => state.auth?.loading);
 
     const submit = async (data) => {
-        dispatch(createAccount(data));
-        navigate('/login');
+        const response = await dispatch(createAccount(data));
+        if (response?.payload?.success) {
+            const username = data?.username;
+            const password = data?.password;
+            const loginResult = await dispatch(
+                userLogin({ username, password })
+            );
+
+            if (loginResult?.type === "login/fulfilled") {
+                navigate("/terms&conditions");
+            } else {
+                navigate("/login");
+            }
+        }
     };
+
+    if (loading) {
+        return <LoginSkeleton />;
+    }
 
     return (
         <>
@@ -36,11 +54,11 @@ function SignUp() {
                             type="text"
                             placeholder=""
                             {...register("username", {
-                                required: true,
+                                required: "username is required",
                             })}
                         />
                         {errors.username && (
-                            <span className="text-white">
+                            <span className="text-red-500">
                                 {errors.username.message}
                             </span>
                         )}
@@ -49,11 +67,11 @@ function SignUp() {
                             type="email"
                             placeholder=""
                             {...register("email", {
-                                required: true,
+                                required: "email is required",
                             })}
                         />
                         {errors.email && (
-                            <span className="text-white">
+                            <span className="text-red-500">
                                 {errors.email.message}
                             </span>
                         )}
@@ -62,12 +80,12 @@ function SignUp() {
                             type="text"
                             placeholder=""
                             {...register("fullName", {
-                                required: true,
+                                required: "fullName is required",
                             })}
                         />
-                        {errors.fullname && (
-                            <span className="text-white">
-                                {errors.fullname.message}
+                        {errors.fullName && (
+                            <span className="text-red-500">
+                                {errors.fullName.message}
                             </span>
                         )}
                         <Input
@@ -75,23 +93,27 @@ function SignUp() {
                             type="password"
                             placeholder=""
                             {...register("password", {
-                                required: true,
+                                required: "password is required",
                             })}
                         />
                         {errors.password && (
-                            <span>{errors.password.message}</span>
+                            <span className="text-red-500">
+                                {errors.password.message}
+                            </span>
                         )}
                         <Input
                             label="Profile Picture: "
                             type="file"
                             placeholder=""
                             {...register("avatar", {
-                                required: true,
+                                required: "avatar is required",
                             })}
                             accept="image/png, image/jpeg"
                         />
                         {errors.password && (
-                            <span>{errors.avatar.message}</span>
+                            <span className="text-red-500">
+                                {errors.avatar.message}
+                            </span>
                         )}
 
                         <Button
