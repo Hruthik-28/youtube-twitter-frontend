@@ -21,7 +21,7 @@ function Search() {
             <form onSubmit={handleSubmit(search)}>
                 <Input
                     placeholder="Search"
-                    {...register("query")}
+                    {...register("query", { required: true })}
                 />
             </form>
         </>
