@@ -7,14 +7,17 @@ const initialState = {
     loading: false,
     uploading: false,
     uploaded: false,
-    videos: null,
+    videos: {
+        docs: [],
+        hasNextPage: false,
+    },
     video: null,
     publishToggled: false,
 };
 
 export const getAllVideos = createAsyncThunk(
     "getAllVideos",
-    async ({userId, sortBy, sortType, query, page, limit}) => {
+    async ({ userId, sortBy, sortType, query, page, limit }) => {
         try {
             const url = new URL(`${BASE_URL}/video`);
 
@@ -128,8 +131,8 @@ const videoSlice = createSlice({
             state.uploaded = false;
         },
         makeVideosNull: (state) => {
-            state.videos = null
-        }
+            state.videos.docs = [];
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getAllVideos.pending, (state) => {
@@ -137,7 +140,8 @@ const videoSlice = createSlice({
         });
         builder.addCase(getAllVideos.fulfilled, (state, action) => {
             state.loading = false;
-            state.videos = action.payload;
+            state.videos.docs = [...state.videos.docs, ...action.payload.docs];
+            state.videos.hasNextPage = action.payload.hasNextPage;
         });
         builder.addCase(publishAvideo.pending, (state) => {
             state.uploading = true;
