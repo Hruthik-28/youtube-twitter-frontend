@@ -116,7 +116,9 @@ function Sidebar() {
                     <NavLink
                         to={item.url}
                         key={item.title}
-                        className={({isActive}) => isActive ? "text-purple-500": "" }
+                        className={({ isActive }) =>
+                            isActive ? "text-purple-500" : ""
+                        }
                     >
                         <div className="flex flex-col items-center gap-1 cursor-pointer p-1">
                             {item.icon}

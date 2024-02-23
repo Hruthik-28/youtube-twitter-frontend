@@ -9,6 +9,7 @@ import {
     Description,
     Spinner,
     InfiniteScroll,
+    Navbar,
 } from "../components";
 import {
     cleanUpComments,
@@ -43,6 +44,7 @@ function VideoDetail() {
 
     return (
         <>
+            <Navbar />
             <Video
                 src={video?.videoFile?.url}
                 poster={video?.thumbnail?.url}

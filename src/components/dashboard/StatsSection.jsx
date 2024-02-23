@@ -17,7 +17,7 @@ function StatsSection({ dashboard }) {
                     />
                     <p>Total Videos</p>
                     <span className="font-bold text-2xl">
-                        {dashboard?.totalLikes}
+                        {dashboard?.totalVideos}
                     </span>
                 </div>
                 <div className="border border-slate-500 sm:p-3 p-2">

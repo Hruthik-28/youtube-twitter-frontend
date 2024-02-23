@@ -21,7 +21,10 @@ function InfiniteScroll({ children, fetchMore, hasNextPage }) {
     return (
         <>
             {children}
-            <div ref={loader}></div>
+            <div
+                ref={loader}
+                className="h-2"
+            ></div>
         </>
     );
 }
