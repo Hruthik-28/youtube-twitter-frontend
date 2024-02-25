@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, Button, Logo } from "../index.js";
+import { Search, Button, Logo, SearchForSmallScreen } from "../index.js";
 import { Link } from "react-router-dom";
 import {
     IoCloseCircleOutline,
@@ -60,6 +60,7 @@ function Navbar() {
                         size={30}
                         fontWeight={"bold"}
                     />
+                    <SearchForSmallScreen />
                 </div>
 
                 {/* login and signup butons for larger screens */}
@@ -115,8 +116,12 @@ function Navbar() {
                                     <NavLink
                                         to={item.url}
                                         key={item.title}
-                                        onClick={() => setToggleMenu(prev => !prev)}
-                                        className={({isActive}) => isActive ? "bg-purple-500": ""}
+                                        onClick={() =>
+                                            setToggleMenu((prev) => !prev)
+                                        }
+                                        className={({ isActive }) =>
+                                            isActive ? "bg-purple-500" : ""
+                                        }
                                     >
                                         <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-purple-500">
                                             <div>{item.icon}</div>
