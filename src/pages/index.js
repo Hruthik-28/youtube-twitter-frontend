@@ -11,6 +11,7 @@ import MySubscriptions from "./MySubscriptions";
 import VideoDetail from "./VideoDetail";
 import SearchVideos from "./SearchVideos";
 import TermsAndConditions from "./TermsAndConditions ";
+import ChannelPlaylist from "./Channel/ChannelPlaylist";
 
 export {
     Channel,
@@ -25,5 +26,6 @@ export {
     MySubscriptions,
     VideoDetail,
     SearchVideos,
-    TermsAndConditions
+    TermsAndConditions,
+    ChannelPlaylist
 }
