@@ -3,13 +3,14 @@ import { MdClose, MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateAvatar, updateCoverImg } from "../store/Slices/authSlice";
+import GetImagePreview from "./GetImagePreview";
 
-function EditAvatar({ cover }) {
+function EditAvatar({ cover, preImage }) {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
     const {
         handleSubmit,
-        register,
+        control,
         formState: { errors },
     } = useForm();
 
@@ -54,18 +55,20 @@ function EditAvatar({ cover }) {
                             <h2 className="text-lg font-bold text-white mb-4">
                                 Change {cover ? "Cover" : "Profile"} Picture
                             </h2>
-                            <div className="flex flex-col sm:flex-row items-center">
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    className="bg-black border text-white p-2 mt-2 mr-2 w-full sm:w-auto"
-                                    {...register("avatar", {
-                                        required: "image is required",
-                                    })}
+                            <div className="flex flex-col items-center">
+                                <GetImagePreview
+                                    name={"avatar"}
+                                    control={control}
+                                    cameraIcon
+                                    cameraSize={30}
+                                    className={
+                                        "w-full h-full object-contain min-h-20 max-h-60 bg-[#222222]"
+                                    }
+                                    image={preImage}
                                 />
                                 <button
                                     type="submit"
-                                    className="bg-purple-500 text-white px-4 py-2 mt-4 sm:mt-2 max-sm:w-full"
+                                    className="bg-purple-500 text-white px-4 py-2 mt-4 w-full"
                                 >
                                     Upload
                                 </button>

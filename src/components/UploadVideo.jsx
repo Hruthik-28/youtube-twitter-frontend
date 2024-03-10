@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { publishAvideo } from "../store/Slices/videoSlice";
 import { IoCloseCircleOutline } from "./icons";
+import GetImagePreview from "./GetImagePreview";
 
 function UploadVideo({ setUploadVideoPopup }) {
     const [videoName, setVideoName] = useState("");
@@ -11,6 +12,7 @@ function UploadVideo({ setUploadVideoPopup }) {
     const {
         handleSubmit,
         register,
+        control,
         formState: { errors },
     } = useForm();
     const dispatch = useDispatch();
@@ -76,7 +78,7 @@ function UploadVideo({ setUploadVideoPopup }) {
                             </div>
                         </section>
 
-                        <section className="px-3">
+                        <section className="px-6 py-2">
                             <div className="w-full border border-dotted h-44 p-1 flex flex-col gap-3 justify-center items-center text-center">
                                 <div>
                                     <h1 className="font-medium text-sm">
@@ -115,41 +117,53 @@ function UploadVideo({ setUploadVideoPopup }) {
                                     {errors.videoFile?.message}
                                 </span>
                             </div>
-                            <div className="space-y-5 mt-2">
-                                <Input2
-                                    type="file"
-                                    label="Thumbnail *"
-                                    accept="image/png, image/jpeg"
-                                    {...register("thumbnail", {
-                                        required: "Thumbnail is required",
-                                    })}
-                                />
-                                <span className="text-red-500 text-xs">
-                                    {errors.thumbnail?.message}
-                                </span>
-                                <Input2
-                                    type="text"
-                                    label="Title *"
-                                    className="mb-2"
-                                    {...register("title", {
-                                        required: "Title is required",
-                                    })}
-                                />
-                                <span className="text-red-500 text-xs">
-                                    {errors.title?.message}
-                                </span>
-                                <div>
-                                    <label>Description *</label>
-                                    <textarea
-                                        rows="5"
-                                        className="focus:bg-[#222222] bg-transparent outline-none border w-full mt-1 p-1"
-                                        {...register("description", {
-                                            required: "Description is required",
-                                        })}
-                                    ></textarea>
+                            <div className="space-y-5 mt-2 w-full grid lg:grid-cols-2 grid-cols-1 lg:gap-10 justify-start items-start">
+                                {/* THUMBNAIL */}
+                                <div className="w-full">
+                                    <GetImagePreview
+                                        name="thumbnail"
+                                        control={control}
+                                        label="Thumbnail *"
+                                        className={
+                                            "w-full h-56 border object-contain"
+                                        }
+                                        cameraIcon={true}
+                                        cameraSize={40}
+                                    />
                                     <span className="text-red-500 text-xs">
-                                        {errors.description?.message}
+                                        {errors.thumbnail?.message}
                                     </span>
+                                </div>
+
+                                <div className="w-full">
+                                    {/* TITLE */}
+                                    <Input2
+                                        type="text"
+                                        label="Title *"
+                                        className="mb-2"
+                                        {...register("title", {
+                                            required: "Title is required",
+                                        })}
+                                    />
+                                    <span className="text-red-500 text-xs">
+                                        {errors.title?.message}
+                                    </span>
+
+                                    {/* DESCRIPTION */}
+                                    <div>
+                                        <label>Description *</label>
+                                        <textarea
+                                            rows="5"
+                                            className="focus:bg-[#222222] bg-transparent outline-none border w-full mt-1 p-1"
+                                            {...register("description", {
+                                                required:
+                                                    "Description is required",
+                                            })}
+                                        ></textarea>
+                                        <span className="text-red-500 text-xs">
+                                            {errors.description?.message}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </section>

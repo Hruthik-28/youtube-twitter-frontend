@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Logo, Button, Input } from "./index";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createAccount, userLogin } from "../store/Slices/authSlice.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginSkeleton from "../skeleton/loginSkeleton.jsx";
-import { FaCamera } from "react-icons/fa";
+import GetImagePreview from "./GetImagePreview.jsx";
 
 function SignUp() {
     const {
@@ -18,26 +18,8 @@ function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.auth?.loading);
-    const [avatarPreview, setAvatarPreview] = useState(null);
-    const [coverPreview, setCoverPreview] = useState(null);
-
-    const handleAvatarChange = (e) => {
-        const files = e.target.files;
-        if (files) {
-            setAvatarPreview(URL.createObjectURL(files[0]));
-        }
-        return files;
-    };
-    const handleCoverChange = (e) => {
-        const files = e.target.files;
-        if (files) {
-            setCoverPreview(URL.createObjectURL(files[0]));
-        }
-        return files;
-    };
 
     const submit = async (data) => {
-        console.log(data);
         const response = await dispatch(createAccount(data));
         if (response?.payload?.success) {
             const username = data?.username;
@@ -69,35 +51,29 @@ function SignUp() {
                         onSubmit={handleSubmit(submit)}
                         className="space-y-4 p-2 text-sm sm:w-96 w-full"
                     >
-                        <div className="w-full relative h-28 bg-[#222222] rounded-xl">
-                            <label
-                                htmlFor="coverImage"
-                                className="cursor-pointer"
-                            >
-                                <img
-                                    src={coverPreview}
-                                    className="object-cover w-full h-full"
-                                />
-                                <div className="text-sm absolute right-2 bottom-2 bg-[#0F0F0F] p-2 rounded hover:bg-opacity-80">
-                                    cover Image
-                                </div>
-                                <Controller
+                        <div className="w-full relative h-28 bg-[#222222]">
+                            <div className="w-full h-full">
+                                <GetImagePreview
                                     name="coverImage"
                                     control={control}
-                                    render={({ field: { onChange } }) => (
-                                        <input
-                                            id="coverImage"
-                                            type="file"
-                                            className="hidden"
-                                            accept="image/png, image/jpeg"
-                                            onChange={(e) => {
-                                                onChange(handleCoverChange(e));
-                                            }}
-                                        />
-                                    )}
+                                    className="w-full h-28 object-cover border-none border-slate-900"
+                                    cameraIcon
                                 />
-                            </label>
-                            <label
+                                <div className="text-sm absolute right-2 bottom-2 hover:text-purple-500 cursor-default">
+                                    cover Image
+                                </div>
+                            </div>
+                            <div className="absolute left-2 bottom-2 rounded-full border-2">
+                                <GetImagePreview
+                                    name="avatar"
+                                    control={control}
+                                    className="object-cover rounded-full h-20 w-20 outline-none"
+                                    cameraIcon={true}
+                                    cameraSize={20}
+                                />
+                            </div>
+
+                            {/* <label
                                 htmlFor="avatar"
                                 className="cursor-pointer"
                             >
@@ -127,7 +103,7 @@ function SignUp() {
                                     )}
                                     rules={{ required: "avatar is required" }}
                                 />
-                            </label>
+                            </label> */}
                         </div>
                         {errors.avatar && (
                             <div className="text-red-500">
