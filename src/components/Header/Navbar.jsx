@@ -5,13 +5,13 @@ import {
     IoCloseCircleOutline,
     BiLike,
     CiSearch,
-    CiSettings,
     HiOutlineVideoCamera,
-    MdOutlineContactSupport,
     SlMenu,
 } from "../icons.js";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { IoMdLogOut } from "react-icons/io";
+import { userLogout } from "../../store/Slices/authSlice.js";
 
 function Navbar() {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -19,6 +19,13 @@ function Navbar() {
     const authStatus = useSelector((state) => state.auth.status);
     const username = useSelector((state) => state.auth?.userData?.username);
     const profileImg = useSelector((state) => state.auth.userData?.avatar.url);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const logout = async () => {
+        await dispatch(userLogout());
+        navigate("/");
+    };
 
     const sidePanelItems = [
         {
@@ -30,16 +37,6 @@ function Navbar() {
             icon: <HiOutlineVideoCamera size={25} />,
             title: "My Content",
             url: `/channel/${username}`,
-        },
-        {
-            icon: <MdOutlineContactSupport size={25} />,
-            title: "Support",
-            url: "/support",
-        },
-        {
-            icon: <CiSettings size={25} />,
-            title: "Settings",
-            url: "/settings",
         },
     ];
 
@@ -140,7 +137,7 @@ function Navbar() {
                                 ))}
                             </div>
 
-                            {!authStatus && (
+                            {!authStatus ? (
                                 <div className="flex flex-col space-y-5 mb-3">
                                     <Link to={"/login"}>
                                         <Button className="w-full bg-[#222222] border hover:bg-white hover:text-black border-slate-500 py-1 px-3">
@@ -152,6 +149,14 @@ function Navbar() {
                                             Sign up
                                         </Button>
                                     </Link>
+                                </div>
+                            ) : (
+                                <div
+                                    className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600"
+                                    onClick={() => logout()}
+                                >
+                                    <IoMdLogOut size={25} />
+                                    <span className="text-base">Logout</span>
                                 </div>
                             )}
                         </div>

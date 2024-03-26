@@ -16,7 +16,7 @@ export const createAccount = createAsyncThunk("register", async (data) => {
     formData.append("password", data.password);
     formData.append("fullName", data.fullName);
     if (data.coverImage) {
-        formData.append("coverImage", data.coverImage[0])
+        formData.append("coverImage", data.coverImage[0]);
     }
 
     try {
@@ -43,6 +43,7 @@ export const userLogin = createAsyncThunk("login", async (data) => {
 export const userLogout = createAsyncThunk("logout", async () => {
     try {
         const response = await axiosInstance.post("/users/logout");
+        toast.success(response.data?.message);
         return response.data;
     } catch (error) {
         toast.error(error?.response?.data?.error);
