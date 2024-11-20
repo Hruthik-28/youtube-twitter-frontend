@@ -13,12 +13,21 @@ function HomePage() {
         (state) => state.video?.videos?.hasNextPage
     );
     const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         dispatch(getAllVideos({ page: 1, limit: 10 }));
 
         return () => dispatch(makeVideosNull());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (loading) {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
+    }, [loading]);
 
     const fetchMoreVideos = useCallback(() => {
         if (hasNextPage) {
@@ -28,6 +37,7 @@ function HomePage() {
                 })
                 .catch((error) => {
                     console.error("Error loading more videos:", error);
+                    setIsLoading(false);
                 });
         }
     }, [page, hasNextPage, dispatch]);
@@ -38,7 +48,7 @@ function HomePage() {
                 dataLength={videos?.length || 0}
                 next={fetchMoreVideos}
                 hasMore={hasNextPage}
-                loader={<HomeSkeleton />}
+                loader={isLoading && <HomeSkeleton />}
                 scrollableTarget="scrollable-container"
             >
                 <div
