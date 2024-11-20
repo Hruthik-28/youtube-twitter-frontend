@@ -1,16 +1,16 @@
 import React from "react";
-import { IoLogoYoutube } from "react-icons/io";
+import { IoIosVideocam } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 function Logo({ size = "30" }) {
     return (
         <>
             <Link to={'/'} className="flex gap-2 items-center">
-                <IoLogoYoutube
+                <IoIosVideocam
                     size={size}
                     color="#A855F7"
                 />
-                <span className="font-bold text-white">YOUTUBE</span>
+                <span className="font-bold text-white">STREAMIFY</span>
             </Link>
         </>
     );
